@@ -1,4 +1,4 @@
-.TH asclock 0.99 "23 July 1996" asclock
+.TH asclock 1x "23 July 1996"
 .UC
 .SH NAME
 \fBasclock\fP \- the AfterStep clock

@@ -74,7 +74,6 @@ int main(int argc,char *argv[])
   XEvent Event;
   XTextProperty name;
   XClassHint classHint;
-  int hadArguments = 0;
   Geometry = "";
   
   /* Parse command line options */
@@ -137,11 +136,8 @@ int main(int argc,char *argv[])
   XSetClassHint(dpy, win, &classHint);
 
   XSelectInput(dpy,win,MW_EVENTS);
-  if (hadArguments)
-     XSelectInput(dpy,iconwin,MW_EVENTS);
-  else
-     XSelectInput(dpy,iconwin,MW_EVENTS&~ButtonPressMask);
-  
+  XSelectInput(dpy,iconwin,MW_EVENTS);
+
   if (XStringListToTextProperty(&wname, 1, &name) ==0) {
     fprintf(stderr, "asclock: can't allocate window name\n");
     exit(-1);

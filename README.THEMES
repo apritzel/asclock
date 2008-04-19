@@ -90,18 +90,18 @@ Here comes the tricky part - the config file:
 
 		   led_elem_width  :  time digit width
 		   led_elem_height :  time digit height
-		   led_24h_hour_x1 :  x position of hour digit 1 in 24h format 
-		   led_24h_hour_x2 :  x position of hour digit 2 in 24h format
+		   led_24h_hour1_x :  x position of hour digit 1 in 24h format 
+		   led_24h_hour2_x :  x position of hour digit 2 in 24h format
 		   led_24h_colon_x :  x position of colon in 24h format
-		   led_24h_min_x1  :  x postion of minute digit 1 in 24h format
-		   led_24h_min_x2  :  x position of minute digit 2 in 24h format
+		   led_24h_min1_x  :  x postion of minute digit 1 in 24h format
+		   led_24h_min2_x  :  x position of minute digit 2 in 24h format
 		   led_24h_topy    :  y top line of all time digits in 24h format
 
-		   led_12h_hour_x1 :  x position of hour digit 1 in 12h format 
-		   led_12h_hour_x2 :  x position of hour digit 2 in 12h format
+		   led_12h_hour1_x :  x position of hour digit 1 in 12h format 
+		   led_12h_hour2_x :  x position of hour digit 2 in 12h format
 		   led_12h_colon_x :  x position of colon in 12h format
-		   led_12h_min_x1  :  x postion of minute digit 1 in 12h format
-		   led_12h_min_x2  :  x position of minute digit 2 in 12h format
+		   led_12h_min1_x  :  x postion of minute digit 1 in 12h format
+		   led_12h_min2_x  :  x position of minute digit 2 in 12h format
 		   led_ampm_x      :  x position of am/pm led
 		   led_ampm_width  :  width of am/pm led
 		   led_12_topy     :  y top line of all time digits in 12h format
@@ -113,8 +113,8 @@ Here comes the tricky part - the config file:
 
 		   cal_elem_width  :  calendar element width
 		   cal_elem_height :  calendar element height
-		   cal_x1          :  x position of calendar digit 1 
-		   cal_x2          :  x position of calendar digit 2
+		   cal1_x          :  x position of calendar digit 1 
+		   cal2_x          :  x position of calendar digit 2
 		   cal_topy        :  y top line of calendar digits
 		   comment: if there is only one calendar digit,
 			    the position of the digit is (x1+x2)/2

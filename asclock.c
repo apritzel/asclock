@@ -109,7 +109,7 @@ int main(int argc,char *argv[])
   back_pix = GetColor("white");
   fore_pix = GetColor("black");
 
-  XWMGeometry(dpy, screen, Geometry, NULL, (borderwidth =1), &mysizehints,
+  XWMGeometry(dpy, screen, Geometry, "64x64+0+0", (borderwidth =1), &mysizehints,
 	      &mysizehints.x,&mysizehints.y,&mysizehints.width,&mysizehints.height, &i); 
 
   mysizehints.width = asclock.attributes.width;

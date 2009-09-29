@@ -4,15 +4,18 @@
 \fBasclock\fP \- the AfterStep clock
 .SH SYNOPSIS
 .B asclock
-[ -help] [-12 | -24] [-shape] 
-        [-position \fI[+|-]x[+|-]y\fP] 
+[ -help] [-12 | -24] [-shape]
+        [-position \fI[+|-]x[+|-]y\fP]
         [-exe \fIprogram\fP]
+        [-theme \fIdir\fP]
         [-led \fIcolor\fP]
-        [-noblink] [-iconic]
+        [-noblink]
+        [-dock]
+        [-version]
 .SH DESCRIPTION
 The \fBasclock\fP is a clock written to emulate the date/time application on 
 the NEXTSTEP(tm) operating system.  \fBasclock\fP supports multiple languages, 
-military and AM/PM time formats, program execution, and the shape extention 
+military and AM/PM time formats, program execution, and the shape extension 
 to X-Windows.  
 .SH CONFIGURATION OPTIONS
 .IP "-help"
@@ -27,8 +30,10 @@ prints the usage message:
             -led <color>            color of the led
             -position [+|-]x[+|-]y  position of asclock
             -shape                  without groundplate
+            -theme <dir>            theme directory
             -noblink                don't blink
-            -iconic                 start up as icon
+            -dock                   without window decorations
+            -version                show version information
 .fi
 .RE
 .IP "-12 or -24"
@@ -47,8 +52,7 @@ pixel base.
 .IP "-led <color>"
 .RS
 specifies the color of the led. To find out what colors are available, try 
-.I showrgb
-.P (part of X11).
+\fIshowrgb\fP(1) (part of X11).
 .RE
 .IP "-position [+|-]x[+|-]y "
 .RS
@@ -60,11 +64,20 @@ specifies the application to start when the pointer is activated over \fBasclock
 .RE
 .IP "-noblink"
 .RS
-specifies if asclock should blink.
+specifies if \fBasclock\fP should blink.
 .RE
-.IP "-iconic"
+.IP "-theme <dir>"
 .RS
-This gives weird output with AfterStep, so don't bother. It's for mwm and other wm's with no hint functionality.
+specifies the theme to used. A theme consists of a directory
+containing 8 xpms and a position file called 'config'.  Read the
+\fIThemes\fP section.
+.RE
+.IP "-dock"
+.RS
+tells the window manager not to put window decorations arround
+\fBasclock\fP, useful for docking with \fIWindow Maker\fP.
+Note that in several window managers this causes \fBasclock\fP to ignore
+the position specified with -position (if present).
 .RE
 .SH INVOCATION
 \fBasclock\fP can be called from one of many ways.  The most common invocation
@@ -77,7 +90,7 @@ is the command line:
 Another way to call \fBasclock\fP is from the window manager:
 .nf
 
-	*Wharf - - MaxSwallow "asclock"	asclock -shape -12&
+	*Wharf - - MaxSwallow "asclock"	asclock -theme shape -12&
 
 .fi
 
@@ -86,6 +99,14 @@ This line, when placed in the \fI.steprc\fP file in the users home directory
 will cause \fBasclock\fP to use the shape extensions so that it will be a
 button on the \fBWharf (1)\fP button bar under the \fBafterstep (1)\fP 
 window manager.
+.SH THEMES
+A theme consists of a directory containing 8 xpms and a position file
+called 'config'.  All tiles within the same xpm must have the same
+width or height, except the colon which has half the width of the
+other digits.  The pixmaps are called: \fIclock.xpm\fP,
+\fIdate.xpm\fP, \fIled.xpm\fP, \fImonth.xpm\fP, \fIweekday.xpm\fP,
+\fIhour.xpm\fP, \fIminute.xpm\fP, \fIsecond.xpm\fP.  For a full
+description of the format, take a look at \fIREADME.THEMES\fP.
 .SH BUGS
 we don't have bugs :)
 .SH COPYRIGHTS
@@ -97,9 +118,3 @@ any purpose is given, as long as the copyright is kept intact.
 Beat Christen <bchriste@iiic.ethz.ch> -- application
 .sp
 Dan Weeks <dan@mango.sfasu.edu> -- man page
-
-
-
-
-
-

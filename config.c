@@ -1,4 +1,6 @@
 #include "asclock.h"
+#include "config.h"
+#include "default.h"
 
 extern char *Geometry;
 
@@ -96,10 +98,38 @@ int findTheme(char*input, char *ret)
   return FALSE;
 }
 
+char* getLanguageExtension()
+{
+	char* lang;
+
+	if((lang = getenv("LC_ALL")) == NULL)
+	{
+		if((lang = getenv("LC_MESSAGES")) == NULL)
+               {
+			if((lang = getenv("LANG")) == NULL)
+			{
+				lang="C";
+			}
+		}
+	}
+
+	char** local = supported_locales;
+	while(*local)
+	{
+		if(strncasecmp(*local, lang, 2) == 0)
+			return *local;
+		local++;
+	}
+
+	fprintf(stderr, "Locale %s not supported\n", lang);
+	return NULL;
+}
+
 int loadTheme(char *themesdir)
 {
   FILE *f;
   char filename[MAX_PATH_LEN];
+  char* langExt = "";
 
   char token[64];
   int type;
@@ -162,14 +192,26 @@ int loadTheme(char *themesdir)
 
   fclose(f);
 
+  langExt = getLanguageExtension();
+
   strcpy(clock_xpm_fn, themesdir);
   strcat(clock_xpm_fn, "/clock.xpm");
 
-  strcpy(month_xpm_fn, themesdir);
-  strcat(month_xpm_fn, "/month.xpm");
+  if (langExt==NULL)
+  {
+	strcpy(month_xpm_fn, themesdir);
+	strcat(month_xpm_fn, "/month.xpm");
 
-  strcpy(weekday_xpm_fn, themesdir);
-  strcat(weekday_xpm_fn, "/weekday.xpm");
+	strcpy(weekday_xpm_fn, themesdir);
+	strcat(weekday_xpm_fn, "/weekday.xpm");
+  }
+  else
+  {
+	sprintf(month_xpm_fn,   "%s%s%s%s", themesdir, "/month.",   langExt, ".xpm");
+	//printf("Opening:%s\n",month_xpm_fn);
+	sprintf(weekday_xpm_fn, "%s%s%s%s", themesdir, "/weekday.", langExt, ".xpm");
+	//printf("Opening:%s\n",weekday_xpm_fn);
+  }
 
   strcpy(date_xpm_fn, themesdir);
   strcat(date_xpm_fn, "/date.xpm");
@@ -197,9 +239,11 @@ void parseArgs(int argc, char **argv)
   int i;
   char themesdir[MAX_PATH_LEN];
   char *ProgName = argv[0];
+  int themeloaded;
 
   itblinks=TRUE;
   itdocks=FALSE;
+  themeloaded=FALSE;
   for(i=1;i<argc;i++) {
     char *arg= argv[i];
 
@@ -223,6 +267,7 @@ void parseArgs(int argc, char **argv)
       case 'n':
 	itblinks = FALSE;
 	continue;
+      case 'i':
       case 'd':
 	itdocks = TRUE;
 	continue;
@@ -231,6 +276,19 @@ void parseArgs(int argc, char **argv)
         continue;
       case '2':
         showampm=0;
+        continue;
+      case 's':
+        if(! findTheme("shaped", themesdir) )
+          {
+            fprintf(stderr, "Could not find theme shaped\n\n");
+            exit(-1);
+          }
+
+        if(!loadTheme(themesdir))
+          exit(-1);
+
+	itdocks = TRUE;
+	themeloaded = TRUE;
         continue;
 			case 'p':
 				if(++i >=argc) usage(ProgName);
@@ -248,6 +306,7 @@ void parseArgs(int argc, char **argv)
         if(!loadTheme(themesdir))
           exit(-1);
 
+	themeloaded = TRUE;
         continue;
       case 'e':
         if(++i >=argc) usage(ProgName);
@@ -257,5 +316,26 @@ void parseArgs(int argc, char **argv)
 
       }
     }
+  }
+
+  if (! themeloaded)
+  {
+      // if the default theme in the file system (i.e. asclock-themes is
+      // present) then that theme is loaded (probably in an l10n version)
+
+      //fprintf(stderr, "No theme loaded");
+
+      if(! findTheme(deftheme, themesdir) )
+      {
+	fprintf(stderr, "Could not find theme %s in path\n\n", deftheme);
+	fprintf(stderr, "using built in (and dropping i18n)\n\n");
+      }
+      else
+      {
+       if(!loadTheme(themesdir))
+         exit(-1);
+      }
+
+      // else use built in theme (only availabe in English)
   }
 }

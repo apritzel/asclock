@@ -27,7 +27,7 @@ do
     if ! test -f themes/$line/classic
     then ln -s themes/$line default_theme
          xmkmf
-         rm -f *.o *~ asclock core
+         rm -f *.o *~ asclock core default.h
          exit 0
     else
 	 mkdir default_theme
@@ -39,6 +39,7 @@ do
 	 ln -s ../themes/$line/minute.xpm default_theme/minute.xpm
 	 ln -s ../themes/$line/second.xpm default_theme/second.xpm
          ln -s ../themes/$line/beats.xpm  default_theme/beats.xpm
+	 echo "static char *deftheme = \"$line\" ;" > default.h
 	 exec ./classic.configure
     fi
   fi

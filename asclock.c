@@ -50,6 +50,17 @@ time_t actualtime;
 long actualmin;
 int actbeats;
 
+/****************************************************************************/
+
+int mytime()
+{
+  struct timeval tv;
+  struct timezone tz;
+
+  gettimeofday(&tv, &tz);
+
+  return tv.tv_sec;
+}
 /* local functions *********************************************************/
 #define MW_EVENTS   (ExposureMask | ButtonPressMask | StructureNotifyMask)
 
@@ -516,17 +527,6 @@ void TwentyFour()
 	    led_elem_width, led_elem_height, 
 	    led_24h_min2_x, led_24h_y);
   
-}
-/****************************************************************************/
-
-int mytime()
-{
-  struct timeval tv;
-  struct timezone tz;
-
-  gettimeofday(&tv, &tz);
-
-  return tv.tv_sec;
 }
 /****************************************************************************/
 void swatch_beats(int beats_cnt)

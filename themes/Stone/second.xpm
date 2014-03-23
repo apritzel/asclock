@@ -1,2 +1,2 @@
-char *second_xpm[];
+static char *second_xpm[];
 

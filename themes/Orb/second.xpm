@@ -1,1 +1,1 @@
-char *second_xpm[] = { NULL };
+static char *second_xpm[] = { NULL };

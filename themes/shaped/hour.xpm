@@ -1,2 +1,2 @@
-char *hour_xpm[];
+static char *hour_xpm[];
 

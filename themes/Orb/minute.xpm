@@ -1,1 +1,1 @@
-char *minute_xpm[] = { NULL };
+static char *minute_xpm[] = { NULL };

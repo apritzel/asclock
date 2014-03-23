@@ -1,5 +1,5 @@
 /* XPM */
-char * beats_xpm[] = {
+static char * beats_xpm[] = {
 "108 11 3 1",
 " 	c #282828",
 "O	c #00df00",

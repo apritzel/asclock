@@ -38,15 +38,15 @@ extern symbol config_symbols[];
 #define INT_TYPE 0;
 
 /* the xpm data */
-extern char *clock_xpm[];
-extern char *month_xpm[];
-extern char *weekday_xpm[];
-extern char *led_xpm[];
-extern char *date_xpm[];
-extern char *hour_xpm[];
-extern char *minute_xpm[];
-extern char *second_xpm[];
-extern char *beats_xpm[];
+static char *clock_xpm[];
+static char *month_xpm[];
+static char *weekday_xpm[];
+static char *led_xpm[];
+static char *date_xpm[];
+static char *hour_xpm[];
+static char *minute_xpm[];
+static char *second_xpm[];
+static char *beats_xpm[];
 
 /* the filenames */
 extern char clock_xpm_fn[MAX_PATH_LEN];

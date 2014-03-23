@@ -1,0 +1,6 @@
+*.o
+/asclock
+/asclock._man
+/Makefile
+/default_theme/
+/default.h

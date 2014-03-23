@@ -1,0 +1,49 @@
+#!/bin/sh
+clear
+echo Welcome to the new world of asclock!
+echo
+echo you can build one of the following themes into asclock as a default theme,
+echo "without specifying it with -t <theme-name>"
+echo
+cd themes
+for i in *
+do
+  echo $i
+done
+
+printf "choose a theme from above: "
+read line
+
+for i in *
+do
+  if test $i = $line
+  then cd ..
+    echo
+    echo you selected \'$line\'
+    echo
+    echo proceed by saying 'make' and then 'make install' if appropriate
+    echo
+    rm -rf default_theme
+    if ! test -f themes/$line/classic
+    then ln -s themes/$line default_theme
+         xmkmf
+         rm -f *.o *~ asclock core
+         exit 0
+    else
+	 mkdir default_theme
+	 ln -s ../themes/$line/config     default_theme/config
+	 ln -s ../themes/$line/date.xpm   default_theme/date.xpm
+	 ln -s ../themes/$line/clock.xpm  default_theme/clock.xpm
+	 ln -s ../themes/$line/led.xpm    default_theme/led.xpm
+	 ln -s ../themes/$line/hour.xpm   default_theme/hour.xpm
+	 ln -s ../themes/$line/minute.xpm default_theme/minute.xpm
+	 ln -s ../themes/$line/second.xpm default_theme/second.xpm
+         ln -s ../themes/$line/beats.xpm  default_theme/beats.xpm
+	 exec ./classic.configure
+    fi
+  fi
+done
+
+echo try again. The theme $line does not exist..
+exit -1
+

@@ -5,7 +5,7 @@ DEPLIBS = $(DEPXLIB)
 LOCAL_LIBRARIES = $(XPMLIB) $(XLIB)  
 
 LINTLIBS = $(LINTXLIB)
-CC = gcc -g
+CC = gcc -g -Wall
 
 SRCS = asclock.c parser.c symbols.c config.c
 OBJS = asclock.o parser.o symbols.o config.o

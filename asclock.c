@@ -75,8 +75,6 @@ static Atom wm_delete_window;
 int main(int argc,char *argv[])
 {
   int i;
-  int ret;
-  char themesdir[MAX_PATH_LEN] = "";
   unsigned int borderwidth ;
   char *display_name = NULL; 
   char *wname = "asclock";
@@ -276,7 +274,6 @@ void nocolor(char *a, char *b)
 /* Konvertiere XPMIcons nach XImage */
 void GetXPM(void)
 {
-  XColor col;
   XWindowAttributes attributes;
   int ret;
 
@@ -564,8 +561,6 @@ void swatch_beats(int beats_cnt)
 /****************************************************************************/
 void InsertTime()
 {
-  int thismonth, thisweekday, thisdate;
-
   /* Zeit auslesen */
   actualtime = mytime();
   actualmin = actualtime / 60;

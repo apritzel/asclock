@@ -12,6 +12,10 @@ COPYING
 
 THIS VERSION
 
+	includes all patches from the Debian package, also some minor fixes.
+	This should compile on any recent/decent machine and setup.
+-----------------------------
+
      The very special new feature is the possibility to completely 
      construct your own clock look. You are always welcome to send in
      asclock themes for distribution with the main package. For infos
